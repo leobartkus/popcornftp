@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Assets/Popcorn_FTP.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\downloadicon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets/Popcorn_FTP.ico" />
+    <Resource Include="Assets\downloadicon.png" />
+</ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentFTP" Version="49.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+</Project>
