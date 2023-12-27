@@ -29,7 +29,7 @@ namespace popcornftp
     public partial class MainWindow : Window
     {
 
-        public string ConfigFile = @"./config.json";
+        public string ConfigFile = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\popcornftp\\config.json";
 
         public MainWindow()
         {
@@ -37,10 +37,10 @@ namespace popcornftp
 
             btnListFiles.Click += new RoutedEventHandler(btnListFiles_Click);
 
-            if(System.Diagnostics.Debugger.IsAttached)
-            {
-                ConfigFile = @"c:\temp\config.json";
-            }
+            //if(System.Diagnostics.Debugger.IsAttached)
+            //{
+            //    ConfigFile = @"c:\temp\config.json";
+           // }
 
             lblStatus.Content = "Initializing";
 
@@ -55,10 +55,23 @@ namespace popcornftp
                 txtFtpServer.Text = options.FtpSite;
                 txtFtpUser.Text = options.FtpUser;
             }
+            else
+            {
+                var dir = Path.GetDirectoryName(ConfigFile);
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
 
-            btnListFiles_Click(this, new RoutedEventArgs());
+            }
 
-            lblStatus.Content = "";
+            if (!string.IsNullOrEmpty(txtFtpServer.Text))
+            {
+
+                btnListFiles_Click(this, new RoutedEventArgs());
+            }
+
+            lblStatus.Content = "Loaded settings from " + ConfigFile;
         }
 
         private void options_changed(object sender, RoutedEventArgs e)
